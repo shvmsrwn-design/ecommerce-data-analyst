@@ -1,0 +1,30 @@
+<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>E-Commerce Sales & Customer Analytics</title><script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+body{margin:0;background:#f4f7fb;color:#172033;font-family:Segoe UI,Arial,sans-serif}header{background:linear-gradient(135deg,#111827,#2563eb);color:#fff;padding:40px 7%}h1{margin:0 0 8px}.wrap{max-width:1250px;margin:28px auto;padding:0 20px}.kpis,.grid{display:grid;gap:16px}.kpis{grid-template-columns:repeat(5,1fr)}.grid{grid-template-columns:1fr 1fr;margin-top:16px}.card{background:#fff;border-radius:16px;padding:20px;box-shadow:0 5px 20px #17203312}.label{color:#687386;font-size:13px}.kpi{font-size:25px;font-weight:700;margin-top:8px}.chart{height:320px}.insights{line-height:1.7;margin-top:16px}@media(max-width:900px){.kpis{grid-template-columns:repeat(2,1fr)}.grid{grid-template-columns:1fr}}
+</style></head><body>
+<header><h1>E-Commerce Sales & Customer Analytics</h1><div>Data Analyst Internship Project • Python • SQL • Excel • Power BI</div></header>
+<div class="wrap"><div class="kpis">
+<div class="card"><div class="label">TOTAL SALES</div><div class="kpi">₹4.24 Cr</div></div>
+<div class="card"><div class="label">TOTAL PROFIT</div><div class="kpi">₹1.11 Cr</div></div>
+<div class="card"><div class="label">TOTAL ORDERS</div><div class="kpi">12,000</div></div>
+<div class="card"><div class="label">AVERAGE ORDER VALUE</div><div class="kpi">₹3,535.66</div></div>
+<div class="card"><div class="label">PROFIT MARGIN</div><div class="kpi">26.07%</div></div></div>
+<div class="grid">
+<div class="card"><h2>Monthly Sales Trend</h2><div class="chart"><canvas id="monthly"></canvas></div></div>
+<div class="card"><h2>Sales by Category</h2><div class="chart"><canvas id="category"></canvas></div></div>
+<div class="card"><h2>Profit by Region</h2><div class="chart"><canvas id="region"></canvas></div></div>
+<div class="card"><h2>Top 10 Products by Sales</h2><div class="chart"><canvas id="products"></canvas></div></div>
+<div class="card"><h2>Sales by Channel</h2><div class="chart"><canvas id="channel"></canvas></div></div>
+<div class="card"><h2>Profit by Customer Segment</h2><div class="chart"><canvas id="segment"></canvas></div></div></div>
+<div class="card insights"><h2>Key Business Insights</h2>
+<p>• Electronics is the strongest revenue category.</p><p>• Central is the highest-performing region by profit.</p><p>• Keyboard is the top-selling individual product.</p><p>• Overall profit margin is 26.07%.</p><p>• Recommendations: prioritize high-performing products, monitor discount impact, and optimize regional/channel marketing.</p></div></div>
+<script>const D={"monthly": [{"Month_Num": 1, "Sales": 3843675.12}, {"Month_Num": 2, "Sales": 3465950.09}, {"Month_Num": 3, "Sales": 3526834.85}, {"Month_Num": 4, "Sales": 3416587.66}, {"Month_Num": 5, "Sales": 3579706.77}, {"Month_Num": 6, "Sales": 3438737.41}, {"Month_Num": 7, "Sales": 3317464.82}, {"Month_Num": 8, "Sales": 3850005.26}, {"Month_Num": 9, "Sales": 3395231.67}, {"Month_Num": 10, "Sales": 3614687.0}, {"Month_Num": 11, "Sales": 3493949.45}, {"Month_Num": 12, "Sales": 3485110.1}], "cat": [{"Category": "Electronics", "Sales": 20060871.6}, {"Category": "Home & Kitchen", "Sales": 10051767.4}, {"Category": "Fashion", "Sales": 6164095.15}, {"Category": "Beauty", "Sales": 3157306.54}, {"Category": "Grocery", "Sales": 2993899.51}], "reg": [{"Region": "Central", "Profit": 2284101.02}, {"Region": "South", "Profit": 2262282.05}, {"Region": "North", "Profit": 2238146.98}, {"Region": "West", "Profit": 2143693.67}, {"Region": "East", "Profit": 2134736.7}], "prod": [{"Product": "Keyboard", "Sales": 4222238.39}, {"Product": "Bluetooth Speaker", "Sales": 4089298.21}, {"Product": "Power Bank", "Sales": 4021049.14}, {"Product": "Wireless Headphones", "Sales": 3997539.78}, {"Product": "Smart Watch", "Sales": 3730746.08}, {"Product": "Coffee Maker", "Sales": 2128662.87}, {"Product": "Cookware Set", "Sales": 2041795.1199999999}, {"Product": "Water Bottle", "Sales": 1994300.33}, {"Product": "Air Fryer", "Sales": 1985342.92}, {"Product": "Mixer Grinder", "Sales": 1901666.16}], "channel": [{"Sales_Channel": "Marketplace", "Sales": 10489715.63}, {"Sales_Channel": "Mobile App", "Sales": 14474928.27}, {"Sales_Channel": "Website", "Sales": 17463296.3}], "segment": [{"Customer_Segment": "Consumer", "Profit": 6934121.43}, {"Customer_Segment": "Corporate", "Profit": 1907802.81}, {"Customer_Segment": "Small Business", "Profit": 2221036.18}]};
+function mk(id,type,labels,datasets,extra){new Chart(document.getElementById(id),{type:type,data:{labels:labels,datasets:datasets},options:Object.assign({responsive:true,maintainAspectRatio:false},extra||{})})}
+mk('monthly','line',D.monthly.map(x=>x.Month_Num),[{label:'Sales',data:D.monthly.map(x=>x.Sales),tension:.25}]);
+mk('category','bar',D.cat.map(x=>x.Category),[{label:'Sales',data:D.cat.map(x=>x.Sales)}]);
+mk('region','bar',D.reg.map(x=>x.Region),[{label:'Profit',data:D.reg.map(x=>x.Profit)}]);
+mk('products','bar',D.prod.map(x=>x.Product),[{label:'Sales',data:D.prod.map(x=>x.Sales)}],{indexAxis:'y'});
+mk('channel','doughnut',D.channel.map(x=>x.Sales_Channel),[{label:'Sales',data:D.channel.map(x=>x.Sales)}]);
+mk('segment','bar',D.segment.map(x=>x.Customer_Segment),[{label:'Profit',data:D.segment.map(x=>x.Profit)}]);</script>
+</body></html>
